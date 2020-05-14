@@ -1,0 +1,43 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    tools {
+        jdk "JDK8"
+    }
+    stages {
+        stage('Ceate sar File') {
+            steps {
+                sh "zconbt/bin/zconbt --properties=properties/fundSAR.properties --file=fundServices/fundServices.sar"
+            }
+        }
+        
+        stage("Deploy sar Files") {
+            steps {
+                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'properties', sourceFiles: 'fundprogServices/fundprogServices.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
+            }
+        }
+        
+        stage("Test Services") {
+            steps {
+                sh 'curl --location --request POST \'http://10.1.1.2:9080/zosConnect/services/fundprog?action=invoke\' --fail --header \'Content-Type: application/json\' --data \'{ "DFH0XCP1": { "inquireSingle":{ "itemID": 20 } } }\''
+            }
+        }
+        
+        stage("Push to GitHub") {
+            steps {
+                sh "git config --global user.email 'jack.billings@ibm.com'"
+                sh "git config --global user.name 'Jack-Billings-IBM'"
+                sh "git add -A"
+                sh "git commit -m 'new sar file'"
+                //need to add git credentials to jenkins
+                withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+                    sh('''
+                        git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+                        git push origin HEAD:master
+                    ''')
+                }
+            }
+        }
+    }
+}
