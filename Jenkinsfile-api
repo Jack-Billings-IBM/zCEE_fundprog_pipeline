@@ -6,27 +6,29 @@ pipeline {
         jdk "JDK8"
     }
     environment {
-        PAYLOAD = '{"DFH0XCP1":{"CA_ORDER_REQUEST":{"CA_ITEM_REF_NUMBER":40,"CA_QUANTITY_REQ":1}}}'
+        POST_PAYLOAD = '{"DFHCOMMAREA":{"FUND_ID":"00000002","FUND_NAME":"Pencil","FUND_RATING":"A","FUND_PRICE":"5"}}'
+        PUT_PAYLOAD = '{"DFHCOMMAREA":{"FUND_ID":"00000002","FUND_NAME":"Pen","FUND_RATING":"B","FUND_PRICE":"3"}}'
     }
     
     stages {
         stage("Test API") {
             steps {
-                sh "curl -X GET --fail --header 'Accept: application/json' 'http://10.1.1.2:9080/catalogManager/items?startItemID=40'"
-                sh "curl -X GET --fail --header 'Accept: application/json' 'http://10.1.1.2:9080/catalogManager/items/30'"
-                sh 'curl --location --request POST --fail "http://10.1.1.2:9080/catalogManager/orders" --header "Content-Type: application/json" --header "Accept: application/json" --header "Content-Type: text/plain" --data ${PAYLOAD} '
+                sh "curl -X GET --fail --header 'Accept: application/json' 'http://10.1.1.2:9029/invest/fund/00000002'"
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/invest/fund" --header "Content-Type: application/json" --header "Accept: application/json" --header "Content-Type: text/plain" --data ${POST_PAYLOAD} '
+                sh 'curl --location --request PUT --fail "http://10.1.1.2:9029/invest/fund" --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Content-Type: text/plain" --data ${PUT_PAYLOAD} '
+                sh "curl -X DELETE --header 'Accept: application/json' 'http://10.1.1.2:9029/invest/fund/00000002'"
             }
         }
         
         stage('Ceate AAR File') {
             steps {
-                sh "zconbt/bin/zconbt --projectDirectory=catalog --outputDirectory=archives"
+                sh "zconbt/bin/zconbt --projectDirectory=fundAPI --outputDirectory=Archives"
             }
         }
         
         stage("Create ARA File") {
             steps {
-                sh "zconbt/bin/zconbt --properties=properties/catalog_ara.properties --file=archives/ara/catalog.ara"
+                sh "zconbt/bin/zconbt --properties=Properties/fund_ara.properties --file=Archives/ara/fund.ara"
             }
         }
         stage("Push to GitHub") {
