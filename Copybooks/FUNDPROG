@@ -1,0 +1,235 @@
+
+      ***************************************************************
+      * VERSION:     1.0
+      * COPYRIGHT:
+      *
+      *   (C) COPYRIGHT International Business Machines Corp. 1998
+      *   All Rights Reserved
+      *   Licensed Materials - Property of IBM
+      *
+      *   US Government Users Restricted Rights - Use, duplication or
+      *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+      *
+      *
+      ***************************************************************
+      *****************************************************************
+      *    CICS COBOL Program to be called for Fund maintenance
+      *
+      *****************************************************************
+
+
+
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. FUNDPROG.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  FUND-ID-AREA                     PIC X(8).
+       01  WORK-AREAS.
+           05  RESP-FLD                     PIC S9(8) COMP.
+           05  RESP-FLD-TWO                 PIC S9(8) COMP.
+           05  APP-ID                       PIC X(10) VALUE 'FUNDPROG:'.
+           05  CSMT-MSG                     PIC X(121).
+           05  DISPLAY-NUMBER               PIC 9999.
+
+       COPY FUNDFILE.
+
+       LINKAGE SECTION.
+       COPY FUNDCOPY.
+
+
+
+       PROCEDURE DIVISION.
+           IF EIBCALEN NOT = LENGTH OF DFHCOMMAREA THEN
+               MOVE LENGTH OF DFHCOMMAREA TO DISPLAY-NUMBER
+               STRING APP-ID 'COMMAREA is incorrect Length'
+                   ', should be ' DISPLAY-NUMBER '.'
+                   DELIMITED BY SIZE
+                       INTO CSMT-MSG
+               PERFORM 7200-WRITE-TO-CSMT-QUEUE
+               EXEC CICS ABEND ABCODE('FUN1') END-EXEC
+           END-IF.
+
+           MOVE '00'   TO RET-CODE.
+
+           MOVE DFHCOMMAREA TO CSMT-MSG.
+           PERFORM 7200-WRITE-TO-CSMT-QUEUE.
+
+           EVALUATE REQUEST-TYPE
+               WHEN 'C'      PERFORM 1000-DO-ADD
+               WHEN 'c'      PERFORM 1000-DO-ADD
+               WHEN 'R'      PERFORM 2000-DO-READ
+               WHEN 'r'      PERFORM 2000-DO-READ
+               WHEN 'D'      PERFORM 3000-DO-DELETE
+               WHEN 'd'      PERFORM 3000-DO-DELETE
+               WHEN 'U'      PERFORM 4000-DO-UPDATE
+               WHEN 'u'      PERFORM 4000-DO-UPDATE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'ERROR: Invalid fund request received'
+                        TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+           EXEC CICS ABEND ABCODE('FUN2') END-EXEC.
+
+
+       1000-DO-ADD.
+           MOVE FUND-ID                TO FUND-FILE-ID.
+           MOVE FUND-NAME              TO FUND-FILE-NAME.
+           MOVE FUND-RATING            TO FUND-FILE-RATING.
+           MOVE FUND-PRICE             TO FUND-FILE-PRICE.
+
+           EXEC CICS WRITE FILE('FUND')
+                  RIDFLD(FUND-FILE-ID)
+                  FROM(FUND-FILE-LAYOUT)
+                  RESP(RESP-FLD)
+                  END-EXEC.
+
+           EVALUATE RESP-FLD
+               WHEN DFHRESP(NORMAL)
+                   MOVE '00' TO RET-CODE
+                   MOVE 'Fund added'
+                          TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN DFHRESP(DUPREC)
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Fund already exists'
+                        TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Problem adding fund, see CICS message log'
+                           TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+
+
+       2000-DO-READ.
+           EXEC CICS READ FILE('FUND')
+                  RIDFLD(FUND-ID)
+                  INTO(FUND-FILE-LAYOUT)
+                  RESP(RESP-FLD)
+                  END-EXEC.
+           EVALUATE RESP-FLD
+               WHEN DFHRESP(NORMAL)
+                   MOVE FUND-FILE-NAME    TO FUND-NAME
+                   MOVE FUND-FILE-RATING  TO FUND-RATING
+                   MOVE FUND-FILE-PRICE   TO FUND-PRICE
+                   MOVE '00' TO RET-CODE
+                   MOVE 'Fund information retrieved'
+                         TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN DFHRESP(NOTFND)
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Fund not found'
+                         TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Error reading error code file'
+                           TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+
+
+       3000-DO-DELETE.
+           EXEC CICS READ FILE('FUND')
+                  RIDFLD(FUND-ID)
+                  INTO(FUND-FILE-LAYOUT)
+                  RESP(RESP-FLD)
+                  END-EXEC.
+           EVALUATE RESP-FLD
+               WHEN DFHRESP(NORMAL)
+                   MOVE FUND-FILE-NAME    TO FUND-NAME
+                   MOVE FUND-FILE-RATING  TO FUND-RATING
+                   MOVE FUND-FILE-PRICE   TO FUND-PRICE
+                   MOVE '00' TO RET-CODE
+               WHEN DFHRESP(NOTFND)
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Fund not found'
+                         TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Error reading error code file'
+                           TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+
+           EXEC CICS DELETE FILE('FUND')
+                  RIDFLD(FUND-ID)
+                  RESP(RESP-FLD)
+                  END-EXEC.
+           EVALUATE RESP-FLD
+               WHEN DFHRESP(NORMAL)
+                   MOVE '00' TO RET-CODE
+                   MOVE 'Fund deleted'
+                         TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN DFHRESP(NOTFND)
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Fund does not exist'
+                            TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Problem deleting fund, see CICS messages'
+                       TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+
+
+       4000-DO-UPDATE.
+           EXEC CICS READ FILE('FUND')
+                  RIDFLD(FUND-ID)
+                  INTO(FUND-FILE-LAYOUT)
+                  RESP(RESP-FLD)
+                  UPDATE
+                  END-EXEC.
+           EVALUATE RESP-FLD
+               WHEN DFHRESP(NORMAL)
+                   MOVE FUND-ID        TO FUND-FILE-ID
+                   MOVE FUND-NAME      TO FUND-FILE-NAME
+                   MOVE FUND-RATING    TO FUND-FILE-RATING
+                   MOVE FUND-PRICE     TO FUND-FILE-PRICE
+                   EXEC CICS REWRITE FILE('FUND')
+                       FROM(FUND-FILE-LAYOUT)
+                       RESP(RESP-FLD-TWO)
+                       END-EXEC
+                   EVALUATE(RESP-FLD-TWO)
+                       WHEN DFHRESP(NORMAL)
+                           MOVE '00' TO RET-CODE
+                           MOVE 'Fund updated'
+                               TO RETURN-COMMENT
+                           PERFORM 7100-RETURN-ERROR-MESSAGE
+                       WHEN OTHER
+                           MOVE '04' TO RET-CODE
+                           MOVE 'Fund not updated, check CICS messages'
+                               TO RETURN-COMMENT
+                           PERFORM 7100-RETURN-ERROR-MESSAGE
+                   END-EVALUATE
+               WHEN OTHER
+                   MOVE '04' TO RET-CODE
+                   MOVE 'Can not read indicated fund'
+                       TO RETURN-COMMENT
+                   PERFORM 7100-RETURN-ERROR-MESSAGE
+           END-EVALUATE.
+
+
+       7100-RETURN-ERROR-MESSAGE.
+           STRING APP-ID RETURN-COMMENT
+               DELIMITED BY SIZE
+                  INTO CSMT-MSG
+           PERFORM 7200-WRITE-TO-CSMT-QUEUE
+           PERFORM 9000-RETURN-TO-CICS.
+
+
+       7200-WRITE-TO-CSMT-QUEUE.
+           EXEC CICS WRITEQ TD QUEUE('CSMT')
+                          FROM(CSMT-MSG)
+                          END-EXEC.
+           MOVE SPACE TO CSMT-MSG.
+
+
+       9000-RETURN-TO-CICS.
+           EXEC CICS RETURN END-EXEC.
