@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Ceate sar File') {
             steps {
-                sh "zconbt/bin/zconbt --properties=properties/fundSAR.properties --file=fundServices/fundServices.sar"
+                sh "zconbt/bin/zconbt --properties=Properties/fund_sar.properties --file=fundServices/fundServices.sar"
             }
         }
         
