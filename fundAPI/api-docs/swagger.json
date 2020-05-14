@@ -1,0 +1,337 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "",
+    "version" : "1.0.0",
+    "title" : "fundapi"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/invest",
+  "schemes" : [ "https", "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/fund" : {
+      "post" : {
+        "tags" : [ "fundapi" ],
+        "operationId" : "postFundService",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "postFundService_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/postFundService_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/postFundService_response_200"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "fundapi" ],
+        "operationId" : "putFundService",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "putFundService_request",
+          "description" : "request body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/putFundService_request"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/putFundService_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/fund/{fundID}" : {
+      "get" : {
+        "tags" : [ "fundapi" ],
+        "operationId" : "getFundService",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "fundID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 8
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/getFundService_response_200"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "fundapi" ],
+        "operationId" : "deleteFundService",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "fundID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 8
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/deleteFundService_response_200"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "getFundService_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "RET_CODE" : {
+              "type" : "string",
+              "maxLength" : 2
+            },
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "RETURN_COMMENT" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "deleteFundService_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "RET_CODE" : {
+              "type" : "string",
+              "maxLength" : 2
+            },
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "RETURN_COMMENT" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "postFundService_request" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "postFundService_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "RET_CODE" : {
+              "type" : "string",
+              "maxLength" : 2
+            },
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "RETURN_COMMENT" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "putFundService_request" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "RETURN_COMMENT" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    },
+    "putFundService_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "DFHCOMMAREA" : {
+          "type" : "object",
+          "properties" : {
+            "RET_CODE" : {
+              "type" : "string",
+              "maxLength" : 2
+            },
+            "FUND_ID" : {
+              "type" : "string",
+              "maxLength" : 8
+            },
+            "FUND_NAME" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "FUND_RATING" : {
+              "type" : "string",
+              "maxLength" : 1
+            },
+            "FUND_PRICE" : {
+              "type" : "string",
+              "maxLength" : 15
+            },
+            "RETURN_COMMENT" : {
+              "type" : "string",
+              "maxLength" : 50
+            },
+            "TESTING_TESTING" : {
+              "type" : "string",
+              "maxLength" : 50
+            }
+          }
+        }
+      }
+    }
+  }
+}

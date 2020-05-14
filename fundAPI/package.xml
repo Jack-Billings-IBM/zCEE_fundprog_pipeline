@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zosConnectApi xmlns="http://www.ibm.com/zosConnect/2.0/zosConnectApi" id="fundapi">
+    <apiSpec title="fundapi" basePath="/invest" description="" version="1.0.0">
+        <path relativePath="/fund/{fundID}">
+            <method type="GET" zosConnectServiceRef="fundService" httpXformFile="api/fund/{fundID}/GET/mapping.xml" operationId="getFundService"/>
+            <method type="DELETE" zosConnectServiceRef="fundService" httpXformFile="api/fund/{fundID}/DELETE/mapping.xml" operationId="deleteFundService"/>
+        </path>
+        <path relativePath="/fund">
+            <method type="POST" zosConnectServiceRef="fundService" httpXformFile="api/fund/POST/mapping.xml" operationId="postFundService"/>
+            <method type="PUT" zosConnectServiceRef="fundService" httpXformFile="api/fund/PUT/mapping.xml" operationId="putFundService"/>
+        </path>
+        <apiDoc docType="SWAGGER">api-docs/swagger.json</apiDoc>
+    </apiSpec>
+</zosConnectApi>
