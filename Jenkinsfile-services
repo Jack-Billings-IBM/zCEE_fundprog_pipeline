@@ -13,13 +13,13 @@ pipeline {
         }
         stage('Ceate sar File') {
             steps {
-                sh "zconbt/bin/zconbt --properties=Properties/fund_sar.properties --file=fundServices/fundServices.sar"
+                sh "zconbt/bin/zconbt --properties=Properties/fund_sar.properties --file=fundService/fundService.sar"
             }
         }
         
         stage("Deploy sar Files") {
             steps {
-                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'fundprogServices', sourceFiles: 'fundprogServices/fundprogServices.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
+                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'fundprogService', sourceFiles: 'fundprogService/fundprogService.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
             }
         }
         
