@@ -4,8 +4,8 @@
         <segment id="1" name="COMMAREA" originalName="COMMAREA">
             <field name="DFHCOMMAREA" originalName="DFHCOMMAREA" included="Y" path="DFHCOMMAREA">
                 <startPos>1</startPos>
-                <bytes>177</bytes>
-                <maxBytes>177</maxBytes>
+                <bytes>127</bytes>
+                <maxBytes>127</maxBytes>
                 <applicationDatatype datatype="STRUCT"/>
                 <field name="REQUEST_TYPE" originalName="REQUEST_TYPE" included="Y" path="DFHCOMMAREA.REQUEST_TYPE">
                     <startPos>1</startPos>
@@ -45,12 +45,6 @@
                 </field>
                 <field name="RETURN_COMMENT" originalName="RETURN_COMMENT" included="Y" path="DFHCOMMAREA.RETURN_COMMENT">
                     <startPos>78</startPos>
-                    <bytes>50</bytes>
-                    <maxBytes>50</maxBytes>
-                    <applicationDatatype datatype="CHAR"/>
-                </field>
-                <field name="TESTING_TESTING" originalName="TESTING_TESTING" included="Y" path="DFHCOMMAREA.TESTING_TESTING">
-                    <startPos>128</startPos>
                     <bytes>50</bytes>
                     <maxBytes>50</maxBytes>
                     <applicationDatatype datatype="CHAR"/>

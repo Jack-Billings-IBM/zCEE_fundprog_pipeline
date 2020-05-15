@@ -31,10 +31,6 @@
         "RETURN_COMMENT" : {
           "maxLength" : 50,
           "type" : "string"
-        },
-        "TESTING_TESTING" : {
-          "maxLength" : 50,
-          "type" : "string"
         }
       }
     }

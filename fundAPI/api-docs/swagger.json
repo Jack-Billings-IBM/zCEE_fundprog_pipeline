@@ -146,10 +146,6 @@
             "RETURN_COMMENT" : {
               "type" : "string",
               "maxLength" : 50
-            },
-            "TESTING_TESTING" : {
-              "type" : "string",
-              "maxLength" : 50
             }
           }
         }
@@ -184,10 +180,6 @@
             "RETURN_COMMENT" : {
               "type" : "string",
               "maxLength" : 50
-            },
-            "TESTING_TESTING" : {
-              "type" : "string",
-              "maxLength" : 50
             }
           }
         }
@@ -214,10 +206,6 @@
             "FUND_PRICE" : {
               "type" : "string",
               "maxLength" : 15
-            },
-            "TESTING_TESTING" : {
-              "type" : "string",
-              "maxLength" : 50
             }
           }
         }
@@ -252,10 +240,6 @@
             "RETURN_COMMENT" : {
               "type" : "string",
               "maxLength" : 50
-            },
-            "TESTING_TESTING" : {
-              "type" : "string",
-              "maxLength" : 50
             }
           }
         }
@@ -284,10 +268,6 @@
               "maxLength" : 15
             },
             "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "TESTING_TESTING" : {
               "type" : "string",
               "maxLength" : 50
             }
@@ -322,10 +302,6 @@
               "maxLength" : 15
             },
             "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "TESTING_TESTING" : {
               "type" : "string",
               "maxLength" : 50
             }

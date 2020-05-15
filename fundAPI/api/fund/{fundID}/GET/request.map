@@ -52,13 +52,6 @@
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element minOccurs="0" name="TESTING_TESTING">
-        <xsd:simpleType>
-          <xsd:restriction base="xsd:string">
-            <xsd:maxLength value="50"/>
-          </xsd:restriction>
-        </xsd:simpleType>
-      </xsd:element>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>]]></inlinedXMLSchema>
@@ -125,9 +118,6 @@
                 </remove>
                 <remove>
                     <output httpIn="body" path="FUND_NAME" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
-                </remove>
-                <remove>
-                    <output httpIn="body" path="TESTING_TESTING" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>
                 </remove>
                 <remove>
                     <output httpIn="body" path="RETURN_COMMENT" shape="1,2" xsdBuiltInOrDerivedSimpleType="http://www.w3.org/2001/XMLSchema:string"/>

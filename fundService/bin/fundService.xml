@@ -20,7 +20,6 @@
                         <field included="Y" fieldName="FUND_RATING"/>
                         <field included="Y" fieldName="FUND_PRICE"/>
                         <field included="Y" fieldName="RETURN_COMMENT"/>
-                        <field included="Y" fieldName="TESTING_TESTING"/>
                     </interfaceField>
                 </segment>
             </interface>
@@ -40,7 +39,6 @@
                         <field included="Y" fieldName="FUND_RATING"/>
                         <field included="Y" fieldName="FUND_PRICE"/>
                         <field included="Y" fieldName="RETURN_COMMENT"/>
-                        <field included="Y" fieldName="TESTING_TESTING"/>
                     </interfaceField>
                 </segment>
             </interface>
