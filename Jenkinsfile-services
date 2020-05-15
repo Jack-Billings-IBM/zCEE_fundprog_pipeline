@@ -6,10 +6,10 @@ pipeline {
         jdk "JDK8"
     }
     environment {
-        POST_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "C"}}'
-        PUT_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "U"}}'
-        GET_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "R"}}'
-        DELETE_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "D"}}'     
+        POST_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"C"}}'
+        PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
+        GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
+        DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
     }
     stages {
         stage('Send Copybook Change') {
