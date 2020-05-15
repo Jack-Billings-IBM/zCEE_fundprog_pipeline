@@ -5,6 +5,12 @@ pipeline {
     tools {
         jdk "JDK8"
     }
+    environment {
+        POST_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "C"}}'
+        PUT_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "U"}}'
+        GET_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "R"}}'
+        DELETE_PAYLOAD = '{"DFHCOMMAREA": {"REQUEST_TYPE": "D"}}'     
+    }
     stages {
         stage('Send Copybook Change') {
             steps {
@@ -25,10 +31,10 @@ pipeline {
         
         stage("Test Services") {
             steps {
-                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "C"}}''
-                sh 'curl --location --request PUT 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "U"}}''
-                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "R"}}''
-                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "D"}}''
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${POST_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${PUT_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${GET_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${DELETE_PAYLOAD} '
             }
         }
         
