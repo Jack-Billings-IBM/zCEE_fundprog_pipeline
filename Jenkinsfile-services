@@ -25,7 +25,10 @@ pipeline {
         
         stage("Test Services") {
             steps {
-                sh 'curl --location --request POST \'http://10.1.1.2:9029/zosConnect/services/fundprog?action=invoke\' --fail --header \'Content-Type: application/json\' --data \'{ "DFH0XCP1": { "inquireSingle":{ "itemID": 20 } } }\''
+                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "C"}}''
+                sh 'curl --location --request PUT 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "U"}}''
+                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "R"}}''
+                sh 'curl --location --request POST 'http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke' --fail \--header 'Content-Type: application/json' \--header 'Content-Type: text/plain' \--data-raw '{"DFHCOMMAREA": {"REQUEST_TYPE": "D"}}''
             }
         }
         
