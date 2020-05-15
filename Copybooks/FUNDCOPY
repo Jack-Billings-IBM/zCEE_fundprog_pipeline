@@ -6,4 +6,3 @@
            03  FUND-RATING                  PIC X.
            03  FUND-PRICE                   PIC X(15).
            03  RETURN-COMMENT               PIC X(50).
-           03  TESTING-TESTING              PIC X(50).
