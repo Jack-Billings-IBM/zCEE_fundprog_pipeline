@@ -6,6 +6,11 @@ pipeline {
         jdk "JDK8"
     }
     stages {
+        stage('Send Copybook Change') {
+            steps {
+                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'IBMUSER.COBFUND.SRC', remoteDirectorySDF: false, removePrefix: 'Copybooks', sourceFiles: 'Copybooks/FUNDCOPY']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
+            }
+        }
         stage('Ceate sar File') {
             steps {
                 sh "zconbt/bin/zconbt --properties=Properties/fund_sar.properties --file=fundServices/fundServices.sar"
@@ -14,7 +19,7 @@ pipeline {
         
         stage("Deploy sar Files") {
             steps {
-                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'properties', sourceFiles: 'fundprogServices/fundprogServices.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
+                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'fundprogServices', sourceFiles: 'fundprogServices/fundprogServices.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
             }
         }
         
