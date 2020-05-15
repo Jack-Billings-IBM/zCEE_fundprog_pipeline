@@ -1,0 +1,27 @@
+      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      * This file contains the generated language structure(s) for
+      *  request JSON schema 'deleteFundService_request.json'.
+      * This structure was generated using 'DFHJS2LS' at mapping level
+      *  '4.3'.
+      * 
+      *  
+      *      06 ReqPathParameters.
+      * 
+      * Comments for field 'fundID':
+      * This field represents the value of JSON schema keyword
+      *  'ReqPathParameters->fundID'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '8'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *        09 fundID-length                 PIC S9999 COMP-5 SYNC.
+      *        09 fundID                        PIC X(8).
+      * 
+      *  
+      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+             06 ReqPathParameters.
+               09 fundID-length                 PIC S9999 COMP-5 SYNC.
+               09 fundID                        PIC X(8).
+ 

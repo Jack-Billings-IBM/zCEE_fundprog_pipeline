@@ -1,0 +1,23 @@
+
+Total 4 operation(s) (success: 4, ignored: 0) defined in api description file: fundAPI/api-docs/swagger.json
+------ Successfully processed operation(s) ------
+operationId: putFundService, basePath: /invest, relativePath: /fund, method: PUT
+- request data structure  : API00Q01
+- response data structure : API00P01
+- api info file           : API00I01
+
+operationId: postFundService, basePath: /invest, relativePath: /fund, method: POST
+- request data structure  : API01Q01
+- response data structure : API01P01
+- api info file           : API01I01
+
+operationId: getFundService, basePath: /invest, relativePath: /fund/{fundID}, method: GET
+- request data structure  : API02Q01
+- response data structure : API02P01
+- api info file           : API02I01
+
+operationId: deleteFundService, basePath: /invest, relativePath: /fund/{fundID}, method: DELETE
+- request data structure  : API03Q01
+- response data structure : API03P01
+- api info file           : API03I01
+

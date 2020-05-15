@@ -1,0 +1,221 @@
+      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      * This file contains the generated language structure(s) for
+      *  response JSON schema 'getFundService_200_response.json'.
+      * This structure was generated using 'DFHJS2LS' at mapping level
+      *  '4.3'.
+      * 
+      *  
+      *      06 RespBody.
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA' is optional. The
+      *  number of instances present is indicated in field
+      *  'DFHCOMMAREA2-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *        09 DFHCOMMAREA2-num              PIC S9(9) COMP-5 SYNC.
+      * 
+      *  
+      *        09 DFHCOMMAREA.
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->RET_CODE' is
+      *  optional. The number of instances present is indicated in
+      *  field 'RET-CODE-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 RET-CODE-num                  PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 RET-CODE.
+      * 
+      * Comments for field 'RET-CODE2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->RET_CODE'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '2'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 RET-CODE2-length              PIC S9999 COMP-5
+      *  SYNC.
+      *            15 RET-CODE2                     PIC X(2).
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->FUND_ID' is
+      *  optional. The number of instances present is indicated in
+      *  field 'FUND-ID-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 FUND-ID-num                   PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 FUND-ID.
+      * 
+      * Comments for field 'FUND-ID2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->FUND_ID'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '8'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 FUND-ID2-length               PIC S9999 COMP-5
+      *  SYNC.
+      *            15 FUND-ID2                      PIC X(8).
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->FUND_NAME' is
+      *  optional. The number of instances present is indicated in
+      *  field 'FUND-NAME-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 FUND-NAME-num                 PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 FUND-NAME.
+      * 
+      * Comments for field 'FUND-NAME2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->FUND_NAME'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '50'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 FUND-NAME2-length             PIC S9999 COMP-5
+      *  SYNC.
+      *            15 FUND-NAME2                    PIC X(50).
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->FUND_RATING' is
+      *  optional. The number of instances present is indicated in
+      *  field 'FUND-RATING-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 FUND-RATING-num               PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 FUND-RATING.
+      * 
+      * Comments for field 'FUND-RATING2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->FUND_RATING'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '1'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 FUND-RATING2-length           PIC S9999 COMP-5
+      *  SYNC.
+      *            15 FUND-RATING2                  PIC X(1).
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->FUND_PRICE' is
+      *  optional. The number of instances present is indicated in
+      *  field 'FUND-PRICE-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 FUND-PRICE-num                PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 FUND-PRICE.
+      * 
+      * Comments for field 'FUND-PRICE2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->FUND_PRICE'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '15'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 FUND-PRICE2-length            PIC S9999 COMP-5
+      *  SYNC.
+      *            15 FUND-PRICE2                   PIC X(15).
+      * 
+      *  
+      * JSON schema keyword 'RespBody->DFHCOMMAREA->RETURN_COMMENT' is
+      *  optional. The number of instances present is indicated in
+      *  field 'RETURN-COMMENT-num'.
+      * There should be at least '0' instance(s).
+      * There should be at most '1' instance(s).
+      *          12 RETURN-COMMENT-num            PIC S9(9) COMP-5
+      *  SYNC.
+      * 
+      *  
+      *          12 RETURN-COMMENT.
+      * 
+      * Comments for field 'RETURN-COMMENT2':
+      * This field represents the value of JSON schema keyword
+      *  'RespBody->DFHCOMMAREA->RETURN_COMMENT'.
+      * JSON schema type: 'string'.
+      * JSON schema keyword 'minLength' value: '0'.
+      * JSON schema keyword 'maxLength' value: '50'.
+      * This field contains a varying length array of characters or
+      *  binary data.
+      *            15 RETURN-COMMENT2-length        PIC S9999 COMP-5
+      *  SYNC.
+      *            15 RETURN-COMMENT2               PIC X(50).
+      * 
+      *  
+      * ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+             06 RespBody.
+ 
+               09 DFHCOMMAREA2-num              PIC S9(9) COMP-5 SYNC.
+ 
+               09 DFHCOMMAREA.
+ 
+                 12 RET-CODE-num                  PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 RET-CODE.
+                   15 RET-CODE2-length              PIC S9999 COMP-5
+            SYNC.
+                   15 RET-CODE2                     PIC X(2).
+ 
+                 12 FUND-ID-num                   PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 FUND-ID.
+                   15 FUND-ID2-length               PIC S9999 COMP-5
+            SYNC.
+                   15 FUND-ID2                      PIC X(8).
+ 
+                 12 FUND-NAME-num                 PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 FUND-NAME.
+                   15 FUND-NAME2-length             PIC S9999 COMP-5
+            SYNC.
+                   15 FUND-NAME2                    PIC X(50).
+ 
+                 12 FUND-RATING-num               PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 FUND-RATING.
+                   15 FUND-RATING2-length           PIC S9999 COMP-5
+            SYNC.
+                   15 FUND-RATING2                  PIC X(1).
+ 
+                 12 FUND-PRICE-num                PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 FUND-PRICE.
+                   15 FUND-PRICE2-length            PIC S9999 COMP-5
+            SYNC.
+                   15 FUND-PRICE2                   PIC X(15).
+ 
+                 12 RETURN-COMMENT-num            PIC S9(9) COMP-5
+            SYNC.
+ 
+                 12 RETURN-COMMENT.
+                   15 RETURN-COMMENT2-length        PIC S9999 COMP-5
+            SYNC.
+                   15 RETURN-COMMENT2               PIC X(50).
+ 

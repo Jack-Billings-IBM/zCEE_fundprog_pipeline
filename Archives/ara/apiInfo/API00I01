@@ -1,0 +1,12 @@
+           03 BAQ-APINAME                PIC X(255)
+              VALUE 'fundapi_1.0.0'.
+           03 BAQ-APINAME-LEN            PIC S9(9) COMP-5 SYNC
+              VALUE 13.
+           03 BAQ-APIPATH                PIC X(255)
+              VALUE '%2Finvest%2Ffund'.
+           03 BAQ-APIPATH-LEN            PIC S9(9) COMP-5 SYNC
+              VALUE 16.
+           03 BAQ-APIMETHOD              PIC X(255)
+              VALUE 'PUT'.
+           03 BAQ-APIMETHOD-LEN          PIC S9(9) COMP-5 SYNC
+              VALUE 3.
