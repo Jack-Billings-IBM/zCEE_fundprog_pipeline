@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh "curl -X GET --fail --header 'Accept: application/json' 'http://10.1.1.2:9029/invest/fund/00000002'"
                 sh 'curl --location --request POST --fail "http://10.1.1.2:9029/invest/fund" --header "Content-Type: application/json" --header "Accept: application/json" --header "Content-Type: text/plain" --data ${POST_PAYLOAD} '
-                sh 'curl --location --request PUT --fail "http://10.1.1.2:9029/invest/fund" --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Content-Type: text/plain" --data ${PUT_PAYLOAD} '
+                sh 'curl --location --request PUT --fail "http://10.1.1.2:9029/invest/fund" --header "Content-Type: application/json" --header "Accept: application/json" --header "Content-Type: text/plain" --data ${PUT_PAYLOAD} '
                 sh "curl -X DELETE --header 'Accept: application/json' 'http://10.1.1.2:9029/invest/fund/00000002'"
             }
         }
