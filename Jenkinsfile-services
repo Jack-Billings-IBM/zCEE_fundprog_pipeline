@@ -10,11 +10,28 @@ pipeline {
         PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
         GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
         DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
+        
+        def remote = [:]
+        remote.name = 'zOS'
+        remote.host = '10.1.1.2'
+        remote.user = 'ibmuser'
+        remote.password = 'thor13'
+        remote.allowAnyHosts = true
     }
     stages {
-        stage('Send Copybook Change') {
+       // stage('Send Copybook Change') {
+         //   steps {
+           //     ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'IBMUSER.COBFUND.SRC', remoteDirectorySDF: false, removePrefix: 'Copybooks', sourceFiles: 'Copybooks/FUNDCOPY']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
+          //  }
+       // }
+       stage("Retrieve FUNDCOPY.cbl") {
             steps {
-                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'IBMUSER.COBFUND.SRC', remoteDirectorySDF: false, removePrefix: 'Copybooks', sourceFiles: 'Copybooks/FUNDCOPY']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp "//\'IBMUSER.COBFUND.SRC\'" copybook', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }
+       }
+       stage('Remote SSH') {
+            steps {
+            sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
             }
         }
         stage('Ceate sar File') {
