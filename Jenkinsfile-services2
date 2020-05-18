@@ -20,7 +20,8 @@ pipeline {
         POST_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"C"}}'
         PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
         GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
-        DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
+        DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'
+        TRANSFER = 'cp "//'IBMUSER.COBFUND.SRC'" copybook'
     }
     
         
@@ -33,7 +34,7 @@ pipeline {
        
        stage("Retrieve FUNDCOPY.cbl") {
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp "//'IBMUSER.COBFUND.SRC'" copybook', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: ${TRANSFER}, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
             }
        }
 
