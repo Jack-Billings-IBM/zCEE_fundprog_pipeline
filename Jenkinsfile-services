@@ -10,14 +10,15 @@ pipeline {
         PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
         GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
         DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
-        
-        def remote = [:]
-        remote.name = 'zOS'
+    }
+    
+    def remote = [:]
+    remote.name = 'zOS'
         remote.host = '10.1.1.2'
         remote.user = 'ibmuser'
         remote.password = 'thor13'
         remote.allowAnyHosts = true
-    }
+        
     stages {
        // stage('Send Copybook Change') {
          //   steps {
@@ -31,7 +32,7 @@ pipeline {
        }
        stage('Remote SSH') {
             steps {
-            sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
+                sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
             }
         }
         stage('Ceate sar File') {
