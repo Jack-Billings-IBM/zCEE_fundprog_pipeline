@@ -4,6 +4,9 @@
     remote.user = 'ibmuser'
     remote.password = 'thor13'
     remote.allowAnyHosts = true
+    stage('Remote SSH') {
+        sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/fundprog_service_pipeline/workspace', override: true
+    }
 pipeline {
     tools {
         jdk "JDK8"
@@ -32,11 +35,7 @@ pipeline {
             }
        }
 
-        stage('Remote SSH') {
-            steps {
-                sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/fundprog_service_pipeline/workspace', override: true
-            }
-        }
+        
         
         stage('List Copybooks 2') {
             steps {
