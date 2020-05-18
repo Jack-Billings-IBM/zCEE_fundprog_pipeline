@@ -1,0 +1,77 @@
+
+    agent {
+        label 'master'
+    }
+    tools {
+        jdk "JDK8"
+    }
+    environment {
+        POST_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"C"}}'
+        PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
+        GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
+        DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
+    }
+    
+        
+    stages {
+       // stage('Send Copybook Change') {
+         //   steps {
+           //     ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'IBMUSER.COBFUND.SRC', remoteDirectorySDF: false, removePrefix: 'Copybooks', sourceFiles: 'Copybooks/FUNDCOPY']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
+          //  }
+       // }
+       stage("Retrieve FUNDCOPY.cbl") {
+            steps {
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp "//\'IBMUSER.COBFUND.SRC\'" copybook', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }
+       }
+
+def remote = [:]
+remote.name = 'zOS'
+remote.host = '10.1.1.2'
+remote.user = 'ibmuser'
+remote.password = 'thor13'
+remote.allowAnyHosts = true
+node {
+    stage('Remote SSH') {
+        sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
+    }
+}
+       
+        stage('Ceate sar File') {
+            steps {
+                sh "zconbt/bin/zconbt --properties=Properties/fund_sar.properties --file=fundService/fundService.sar"
+            }
+        }
+        
+        stage("Deploy sar Files") {
+            steps {
+                ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/zosconnect/servers/fundprog/resources/zosconnect/services', remoteDirectorySDF: false, removePrefix: 'fundprogService', sourceFiles: 'fundprogService/fundprogService.sar']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]               
+            }
+        }
+        
+        stage("Test Services") {
+            steps {
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${POST_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${PUT_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${GET_PAYLOAD} '
+                sh 'curl --location --request POST --fail "http://10.1.1.2:9029/zosConnect/services/fundService?action=invoke" --header "Content-Type: application/json" --header "Content-Type: text/plain" --data ${DELETE_PAYLOAD} '
+            }
+        }
+        
+        stage("Push to GitHub") {
+            steps {
+                sh "git config --global user.email 'jack.billings@ibm.com'"
+                sh "git config --global user.name 'Jack-Billings-IBM'"
+                sh "git add -A"
+                sh "git commit -m 'new sar file'"
+                //need to add git credentials to jenkins
+                withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+                    sh('''
+                        git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+                        git push origin HEAD:master
+                    ''')
+                }
+            }
+        }
+    }
+}
