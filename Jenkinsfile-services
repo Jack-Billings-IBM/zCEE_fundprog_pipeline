@@ -1,6 +1,14 @@
 pipeline {
     agent {
         label 'master'
+        node {
+            def remote = [:]
+            remote.name = 'zOS'
+            remote.host = '10.1.1.2'
+            remote.user = 'ibmuser'
+            remote.password = 'thor13'
+            remote.allowAnyHosts = true
+        }
     }
     tools {
         jdk "JDK8"
@@ -11,13 +19,6 @@ pipeline {
         GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
         DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'     
     }
-    
-    def remote = [:]
-    remote.name = 'zOS'
-        remote.host = '10.1.1.2'
-        remote.user = 'ibmuser'
-        remote.password = 'thor13'
-        remote.allowAnyHosts = true
         
     stages {
        // stage('Send Copybook Change') {
