@@ -28,11 +28,9 @@ pipeline {
             }
        }
 
-    node {
         stage('Remote SSH') {
             sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
         }
-    }
        
         stage('Ceate sar File') {
             steps {
