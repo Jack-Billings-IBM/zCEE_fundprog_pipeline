@@ -1,3 +1,9 @@
+    def remote = [:]
+    remote.name = 'zOS'
+    remote.host = '10.1.1.2'
+    remote.user = 'ibmuser'
+    remote.password = 'thor13'
+    remote.allowAnyHosts = true
 pipeline {
     tools {
         jdk "JDK8"
@@ -22,12 +28,6 @@ pipeline {
             }
        }
 
-    def remote = [:]
-    remote.name = 'zOS'
-    remote.host = '10.1.1.2'
-    remote.user = 'ibmuser'
-    remote.password = 'thor13'
-    remote.allowAnyHosts = true
     node {
         stage('Remote SSH') {
             sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
