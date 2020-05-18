@@ -28,6 +28,9 @@ pipeline {
        
        stage('List Copybooks') {
             steps {
+                sh "ls"
+                sh "cd Copybooks"
+                sh "ls"
                 sh "cd Copybooks"
                 sh "ls"
             }
