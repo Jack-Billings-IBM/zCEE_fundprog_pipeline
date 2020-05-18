@@ -44,7 +44,7 @@ pipeline {
 
         stage('Remote SSH') {
             steps {
-                sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/test_copybook/workspace/Copybooks', override: true
+                sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/fundprog_service_pipeline/workspace', override: true
             }
         }
         
