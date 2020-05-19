@@ -1,14 +1,3 @@
-node {
-    def remote = [:]
-    remote.name = 'zOS'
-    remote.host = '10.1.1.2'
-    remote.user = 'ibmuser'
-    remote.password = 'thor13'
-    remote.allowAnyHosts = true
-    stage('Remote SSH') {
-        sshGet remote: remote, from: '/u/ibmuser/copybook/fundcopy', into: '/var/lib/jenkins/jobs/fundprog_service_pipeline/workspace', override: true
-    }
-}
 pipeline {
     tools {
         jdk "JDK8"
@@ -34,7 +23,7 @@ pipeline {
        
        stage("Retrieve FUNDCOPY.cbl") {
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: ${TRANSFER}, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: ‘cp “//\’IBMUSER.COBFUND’\” copybook’, execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
             }
        }
 
