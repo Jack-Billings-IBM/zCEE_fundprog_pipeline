@@ -21,7 +21,7 @@ pipeline {
         PUT_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"U"}}'
         GET_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"R"}}'
         DELETE_PAYLOAD = '{"DFHCOMMAREA":{"REQUEST_TYPE":"D"}}'
-        TRANSFER = 'cp "//'IBMUSER.COBFUND.SRC'" copybook'
+        TRANSFER = cp "//'IBMUSER.COBFUND.SRC'" copybook
     }
     
         
