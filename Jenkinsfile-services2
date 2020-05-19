@@ -6,7 +6,7 @@ node {
     remote.password = 'thor13'
     remote.allowAnyHosts = true
     stage('Remote SSH') {
-      sshGet remote: remote, from: '"//\'IBMUSER.COBFUND.SRC\'", into: 'test', override: true
+      sshGet remote: remote, from: '"//\\'IBMUSER.COBFUND.SRC\\'", into: 'test', override: true
       cd test
       ls
     }
