@@ -19,11 +19,11 @@ pipeline {
            //     ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, masterNodeName: '', paramPublish: null, publishers: [[configName: 'zOS', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'IBMUSER.COBFUND.SRC', remoteDirectorySDF: false, removePrefix: 'Copybooks', sourceFiles: 'Copybooks/FUNDCOPY']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
           //  }
        // }
-       stage("Retrieve FUNDCOPY.cbl") {
-            steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp "//\'IBMUSER.COBFUND.SRC\'" copybook', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-            }
-       }
+      // stage("Retrieve FUNDCOPY.cbl") {
+       //     steps {
+      //          sshPublisher(publishers: [sshPublisherDesc(configName: 'zOS', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cp "//\'IBMUSER.COBFUND.SRC\'" copybook', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+      //      }
+       // }
 
        
         stage('Ceate sar File') {
