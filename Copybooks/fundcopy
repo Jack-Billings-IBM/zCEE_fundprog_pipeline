@@ -1,0 +1,8 @@
+       01  DFHCOMMAREA.                                                 00030002
+           03  REQUEST-TYPE                 PIC X.                      00040002
+           03  RET-CODE                     PIC XX.                     00050002
+           03  FUND-ID                      PIC X(8).                   00060002
+           03  FUND-NAME                    PIC X(50).                  00070002
+           03  FUND-RATING                  PIC X.                      00080002
+           03  FUND-PRICE                   PIC X(15).                  00090002
+           03  RETURN-COMMENT               PIC X(50).                  00100002
