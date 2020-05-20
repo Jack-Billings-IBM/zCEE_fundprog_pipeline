@@ -119,195 +119,245 @@
   "definitions" : {
     "getFundService_response_200" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperationResponse" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperationResponse" : {
           "type" : "object",
           "properties" : {
-            "RET_CODE" : {
-              "type" : "string",
-              "maxLength" : 2
-            },
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
-            },
-            "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "ret_code" : {
+                  "type" : "string",
+                  "maxLength" : 2
+                },
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                },
+                "return_comment" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating", "ret_code", "return_comment" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Response schema for the FUNDCOPY JSON interface"
     },
     "deleteFundService_response_200" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperationResponse" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperationResponse" : {
           "type" : "object",
           "properties" : {
-            "RET_CODE" : {
-              "type" : "string",
-              "maxLength" : 2
-            },
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
-            },
-            "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "ret_code" : {
+                  "type" : "string",
+                  "maxLength" : 2
+                },
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                },
+                "return_comment" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating", "ret_code", "return_comment" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Response schema for the FUNDCOPY JSON interface"
     },
     "postFundService_request" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperation" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperation" : {
           "type" : "object",
           "properties" : {
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Request schema for the FUNDCOPY JSON interface"
     },
     "postFundService_response_200" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperationResponse" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperationResponse" : {
           "type" : "object",
           "properties" : {
-            "RET_CODE" : {
-              "type" : "string",
-              "maxLength" : 2
-            },
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
-            },
-            "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "ret_code" : {
+                  "type" : "string",
+                  "maxLength" : 2
+                },
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                },
+                "return_comment" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating", "ret_code", "return_comment" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Response schema for the FUNDCOPY JSON interface"
     },
     "putFundService_request" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperation" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperation" : {
           "type" : "object",
           "properties" : {
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
-            },
-            "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Request schema for the FUNDCOPY JSON interface"
     },
     "putFundService_response_200" : {
       "type" : "object",
+      "required" : [ "FUNDCOPYOperationResponse" ],
       "properties" : {
-        "DFHCOMMAREA" : {
+        "FUNDCOPYOperationResponse" : {
           "type" : "object",
           "properties" : {
-            "RET_CODE" : {
-              "type" : "string",
-              "maxLength" : 2
-            },
-            "FUND_ID" : {
-              "type" : "string",
-              "maxLength" : 8
-            },
-            "FUND_NAME" : {
-              "type" : "string",
-              "maxLength" : 50
-            },
-            "FUND_RATING" : {
-              "type" : "string",
-              "maxLength" : 1
-            },
-            "FUND_PRICE" : {
-              "type" : "string",
-              "maxLength" : 15
-            },
-            "RETURN_COMMENT" : {
-              "type" : "string",
-              "maxLength" : 50
+            "dfhcommarea" : {
+              "type" : "object",
+              "properties" : {
+                "ret_code" : {
+                  "type" : "string",
+                  "maxLength" : 2
+                },
+                "fund_id" : {
+                  "type" : "string",
+                  "maxLength" : 8
+                },
+                "fund_name" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                },
+                "fund_rating" : {
+                  "type" : "string",
+                  "maxLength" : 1
+                },
+                "fund_price" : {
+                  "type" : "string",
+                  "maxLength" : 15
+                },
+                "return_comment" : {
+                  "type" : "string",
+                  "maxLength" : 50
+                }
+              },
+              "required" : [ "fund_id", "fund_name", "fund_price", "fund_rating", "ret_code", "return_comment" ]
             }
-          }
+          },
+          "required" : [ "dfhcommarea" ]
         }
-      }
+      },
+      "description" : "Response schema for the FUNDCOPY JSON interface"
     }
   }
 }
